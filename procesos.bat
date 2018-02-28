@@ -1,0 +1,4 @@
+:etiq 
+start 
+goto 
+:etiq
