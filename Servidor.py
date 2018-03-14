@@ -4,7 +4,7 @@ import sys
 import time
 import threading
 
-server_address = ('192.168.0.107', 6000)
+server_address = ('localhost', 6000)
 # Creando el socket TCP/IP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Enlace de socket y puerto
@@ -52,19 +52,12 @@ while True:
                 data = connection.recv(1000)
                 print (sys.stderr, 'recibido "%s"' % data.decode())
                 
-                thread1 = threading.Thread(target=CalcularPrimosDe, args=(int(float(data.decode())) ,))
-                start = time.time()
-                thread1.start()
-            
-
-                while thread1.is_alive() == True:
-                    while thread1.is_alive() == False:
-                        end = time.time()
-                        threadTime = end - start
-                        print (sys.stderr, 'enviando mensaje de vuelta al cliente')
-                        connection.sendall(str(threadTime).encode())
-                        threadTime = time.time()
-                        break
+                t0 = time.clock()
+                CalcularPrimosDe(int(float(data.decode())) )
+                t1 = time.clock()
+                print (sys.stderr, 'enviando mensaje de vuelta al cliente')
+                connection.sendall(str(t1-t0).encode())
+                break
             iCount +=1
             if iCount > 1:
                 break

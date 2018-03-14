@@ -32,6 +32,3 @@ while True:
                 print (sys.stderr, 'no hay mas datos', client_address)
                 break
                 
-    finally:
-        # Cerrando conexion
-        connection.close()

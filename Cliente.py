@@ -23,7 +23,7 @@ def EnviarNumero(server_address, NumeroAEnviar):
         amount_expected = len(message)
         
         
-        data = sock.recv(1000)
+        data = sock.recv(9999)
         amount_received += len(data)
         print (sys.stderr, 'recibiendo "%s"' % data.decode())
     
@@ -33,11 +33,12 @@ def EnviarNumero(server_address, NumeroAEnviar):
 
 
 
-arrIp = ['192.168.0.107','192.168.0.109'] 
+arrIp = ['localhost','localhost'] 
 sockConexion = (arrIp[0], 6000)
 sockConexion1 = (arrIp[1], 6000)
 
-thread1 = threading.Thread(target=EnviarNumero, args=(sockConexion,99,))
+thread1 = threading.Thread(target=EnviarNumero, args=(sockConexion,500,))
 thread2 = threading.Thread(target=EnviarNumero, args=(sockConexion1,99,))
 
 thread1.start()
+
